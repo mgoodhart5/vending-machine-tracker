@@ -6,6 +6,7 @@ class Machine < ApplicationRecord
   has_many :snacks, through: :machine_snacks
 
   def self.average_price
-    joins(machine_snacks: :snacks).group(machine_id: :id).pluck(:price)
+    joins(:snacks).group(machine_id: :id).where(snack_id: snacks.id)
   end
+  
 end
